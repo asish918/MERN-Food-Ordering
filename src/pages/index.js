@@ -1,3 +1,4 @@
+import Featured from '@/components/Featured'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -11,9 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        Home Page
-      </main>
+      <Featured />
 
     </div>
   )
