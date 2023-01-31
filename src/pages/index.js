@@ -1,4 +1,5 @@
 import Featured from '@/components/Featured'
+import PizzaList from '@/components/PizzaList'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -13,7 +14,7 @@ export default function Home() {
       </Head>
 
       <Featured />
-
+      <PizzaList />
     </div>
   )
 }
