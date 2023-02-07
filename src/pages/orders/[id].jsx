@@ -1,9 +1,10 @@
 import styles from '../../styles/Order.module.css'
 import Image from 'next/image'
+import axios from 'axios';
 
-const Order = () => {
+const Order = ({order}) => {
 
-    const status = 0;
+    const status = order.status;
     
     const statusClass = (index) => {
         if(index - status < 1) return styles.done
@@ -27,18 +28,18 @@ const Order = () => {
                         <tbody>
                             <tr className={styles.tr}>
                                 <td>
-                                    <span className={styles.id}>1234512312</span>
+                                    <span className={styles.id}>{order._id}</span>
                                 </td>
                                 <td>
                                     <span className={styles.name}>
-                                        John Doe
+                                        {order.customer}
                                     </span>
                                 </td>
                                 <td>
-                                    <span className={styles.address}>Area 51, Nevada, United States</span>
+                                    <span className={styles.address}>{order.address}</span>
                                 </td>
                                 <td>
-                                    <span className={styles.total}>$79.00</span>
+                                    <span className={styles.total}>${order.total}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -95,3 +96,12 @@ const Order = () => {
 }
 
 export default Order
+
+export const getServerSideProps = async ({ params }) => {
+    const response = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
+    return {
+        props: {
+            order: response.data,
+        }
+    }
+}
