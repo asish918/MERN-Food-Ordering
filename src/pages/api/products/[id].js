@@ -16,23 +16,22 @@ export default async function handler(req, res) {
             const product = await Product.findById(id)
             res.status(200).json(product)
         }
-
+        
         if (method === "PUT") {
-
-            console.log('CREATING DOCUMENT');
-            const test = await Product.create(req.body);
-            console.log('CREATED DOCUMENT');
-
-            res.json({ test });
+            
+            console.log('UPDATING DOCUMENT');
+            const test = await Product.findByIdAndUpdate(id, req.body, {new: true});
+            console.log('UPDDATED DOCUMENT');
+            
+            res.status(200).json(test)
         }
-
+        
         if (method === "DELETE") {
-
-            console.log('CREATING DOCUMENT');
-            const test = await Product.create(req.body);
-            console.log('CREATED DOCUMENT');
-
-            res.json({ test });
+            
+            console.log('DELETING DOCUMENT');
+            await Product.findByIdAndDelete(id);
+            console.log('DELETED DOCUMENT');
+            res.status(200).json({"message": "Product Deleted..."})
         }
     } catch (error) {
         console.log(error);
