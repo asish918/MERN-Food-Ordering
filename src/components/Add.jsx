@@ -26,7 +26,23 @@ const Add = ({ setClose }) => {
     }
 
     const handleCreate = async () => {
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "upload")
+        try {
+            const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/dkvbitvjk/image/upload", data);
 
+            console.log(uploadRes.data)
+            const {url} = uploadRes.data;
+            const newProduct = {
+                title, desc, prices, extraOptions, img: url
+            };
+
+            await axios.post("http://localhost:3000/api/products", newProduct);
+            setClose(false)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

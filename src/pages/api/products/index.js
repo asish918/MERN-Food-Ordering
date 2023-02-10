@@ -2,7 +2,9 @@ import connectMongo from "../../../../utils/mongo";
 import Product from '../../../../models/Product'
 
 export default async function handler(req, res) {
-    const { method } = req;
+    const { method, cookies } = req;
+
+    const token = cookies.token;
 
     try {
         console.log('CONNECTING TO MONGO');
@@ -15,7 +17,9 @@ export default async function handler(req, res) {
         }
 
         if(method === "POST"){
-
+            if(!token || token !== process.env.token){
+                return res.status(401).json("Not authenticated")
+            }
             console.log('CREATING DOCUMENT');
             const test = await Product.create(req.body);
             console.log('CREATED DOCUMENT');

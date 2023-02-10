@@ -5,7 +5,10 @@ export default async function handler(req, res) {
     const { 
         method, 
         query: { id }, 
+        cookies
     } = req;
+
+    const token = cookies.token;
 
     try {
         console.log('CONNECTING TO MONGO');
@@ -27,7 +30,9 @@ export default async function handler(req, res) {
         }
         
         if (method === "DELETE") {
-            
+            if (!token || token !== process.env.token) {
+                return res.status(401).json("Not authenticated")
+            }
             console.log('DELETING DOCUMENT');
             await Product.findByIdAndDelete(id);
             console.log('DELETED DOCUMENT');
