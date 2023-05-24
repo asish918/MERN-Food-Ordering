@@ -29,6 +29,7 @@ const Add = ({ setClose }) => {
         const data = new FormData();
         data.append("file", file);
         data.append("upload_preset", "upload")
+
         try {
             const uploadRes = await axios.post("https://api.cloudinary.com/v1_1/dkvbitvjk/image/upload", data);
 
@@ -38,7 +39,7 @@ const Add = ({ setClose }) => {
                 title, desc, prices, extraOptions, img: url
             };
 
-            await axios.post("http://localhost:3000/api/products", newProduct);
+            await axios.post("https://mern-food-ordering.vercel.app/api/products", newProduct);
             setClose(true)
         } catch (error) {
             console.log(error)
@@ -51,8 +52,8 @@ const Add = ({ setClose }) => {
                 <span onClick={() => setClose(true)} className={styles.close}>X</span>
                 <h1>Add a new Pizza</h1>
                 <div className={styles.item}>
-                    <label className={styles.label} onChange={(e) => setFile(e.target.files[0])}>Choose an Image</label>
-                    <input type="file" />
+                    <label className={styles.label}>Choose an Image</label>
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                 </div>
 
                 <div className={styles.item}>
