@@ -39,7 +39,7 @@ const Add = ({ setClose }) => {
             };
 
             await axios.post("http://localhost:3000/api/products", newProduct);
-            setClose(false)
+            setClose(true)
         } catch (error) {
             console.log(error)
         }
