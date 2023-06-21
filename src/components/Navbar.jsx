@@ -34,6 +34,11 @@ const Navbar = () => {
             </div>
 
             <div className={styles.item}>
+                <Link target='_blank' href="https://github.com/asish918/MERN-Food-Ordering">
+                    <div className={styles.cart}>
+                        <Image src="/github.png" alt="logo" width="30" height="30" />
+                    </div>
+                </Link>
                 <Link href="/cart">
                     <div className={styles.cart}>
                         <Image src="/cart.png" alt="logo" width="30" height="30" />
